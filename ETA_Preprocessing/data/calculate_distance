@@ -1,0 +1,27 @@
+import math
+
+Aj = float(input("Aj="))  # 经纬度
+Aw = float(input("Aw="))
+Bj = float(input("Bj="))
+Bw = float(input("Bw="))
+R = 6371  # m 地球平均半径
+dis = 2 * R * math.asin(
+    math.sqrt(pow(math.sin((Bw - Aw) * math.pi / 180.0 / 2), 2) +
+              math.cos(Aw * math.pi / 180.0) * math.cos(Bw * math.pi / 180.0) * pow(
+        math.sin((Bj - Aj) * math.pi / 180.0 / 2), 2)))
+print(dis)
+
+
+def Calcu_Dist(lat1, lon1, lat2, lon2):
+    R = 6371
+    dLat = (lat2 - lat1) * math.pi / 180.0
+    dLon = (lon2 - lon1) * math.pi / 180.0
+
+    a = math.sin(dLat / 2) * math.sin(dLat / 2) + math.cos(lat1 * math.pi / 180.0) * math.cos(
+        lat2 * math.pi / 180.0) * math.sin(dLon / 2) * math.sin(dLon / 2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    dist = R * c
+    return dist
+
+
+print(Calcu_Dist(Aw, Aj, Bw, Bj))
